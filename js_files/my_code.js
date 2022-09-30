@@ -12,7 +12,7 @@ function sendDTMF(){
   localStorage.clear();
   
   let opts = { 
-    'body': {"digits": digitsToSend} // Object | Digits
+    'body': {"digits": StrDigits} // Object | Digits
   };
   
   apiInstance.postConversationParticipantDigits(StrConversationId, StrParticipantId, opts)
