@@ -53,7 +53,7 @@ client.setPersistSettings(true);
 client.loginImplicitGrant("10b85dde-54ad-4bb1-b0b0-e80c29b39e4e", "https://baigsyboy.github.io/GenCloud-SendDTMF/", { state: "TEST" })
   .then(() => {
     console.log('Logged In');
-    sendDTMF;
+    sendDTMF();
   })
   .catch((err) => {
     // Handle failure response
