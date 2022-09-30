@@ -1,3 +1,31 @@
+//Function to take the info from local storage and
+//use the API to send the digits
+
+function sendDTMF(){
+  let apiInstance = new platformClient.ConversationsApi();
+
+  const StrConversationId = localStorage.getItem('conversationId');
+  const StrParticipantId = localStorage.getItem('participantId');
+  const StrDigits = localStorage.getItem('DTMFdigits');
+  const digitsToSend = "\"" + StrDigits + "\"";
+  console.log("Digits: ", digitsToSend);
+  localStorage.clear();
+  
+  let opts = { 
+    'body': {"digits": digitsToSend} // Object | Digits
+  };
+  
+  apiInstance.postConversationParticipantDigits(StrConversationId, StrParticipantId, opts)
+    .then(() => {
+      console.log('postConversationParticipantDigits returned successfully.');
+    })
+    .catch((err) => {
+      console.log('There was a failure calling postConversationParticipantDigits');
+      console.error(err);
+    });
+
+}
+
 // Check local storage for parameters or get from URL
 // This is to deal with the redirect
 if (localStorage.conversationId){
@@ -24,35 +52,10 @@ client.setPersistSettings(true);
 // Authenticate then update the presence on the page
 client.loginImplicitGrant("10b85dde-54ad-4bb1-b0b0-e80c29b39e4e", "https://baigsyboy.github.io/GenCloud-SendDTMF/", { state: "TEST" })
   .then(() => {
-    console.log('Logged-In');
+    console.log('Logged In');
     sendDTMF;
   })
   .catch((err) => {
     // Handle failure response
     console.log(err);
   });
-
-function sendDTMF(){
-  let apiInstance = new platformClient.ConversationsApi();
-
-  const StrConversationId = localStorage.getItem('conversationId');
-  const StrParticipantId = localStorage.getItem('participantId');
-  const StrDigits = localStorage.getItem('DTMFdigits');
-  const digitsToSend = "\"" + StrDigits + "\"";
-  console.log(digitsToSend);
-  localStorage.clear();
-  
-  let opts = { 
-    'body': {"digits": digitsToSend} // Object | Digits
-  };
-  
-  apiInstance.postConversationParticipantDigits(StrConversationId, StrParticipantId, opts)
-    .then(() => {
-      console.log('postConversationParticipantDigits returned successfully.');
-    })
-    .catch((err) => {
-      console.log('There was a failure calling postConversationParticipantDigits');
-      console.error(err);
-    });
-
-}
