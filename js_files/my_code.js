@@ -1,13 +1,13 @@
 // Check local storage for parameters or get from URL
 // This is to deal with the redirect
-if (localStorage.conversationId){
-   sendDTMF;
-} else{
+if (window.location.search){
   const urlParams = new URLSearchParams(window.location.search); 
   localStorage.setItem('conversationId', urlParams.get('conv'));
   localStorage.setItem('participantId', urlParams.get('part'));
   localStorage.setItem('DTMFdigits', urlParams.get('digits'));
   console.log("Conv: ", localStorage.getItem('conversationId'), "Part: ", localStorage.getItem('participantId'), "Digits: ", localStorage.getItem('DTMFdigits'));
+} else{
+  sendDTMF;
 }
 
 // Obtain a reference to the platformClient object
@@ -23,14 +23,14 @@ client.setPersistSettings(true);
 
 
 // Authenticate then update the presence on the page
-//client.loginImplicitGrant("10b85dde-54ad-4bb1-b0b0-e80c29b39e4e", "https://baigsyboy.github.io/GenCloud-change-status/", { state: "TEST" })
-//  .then(() => {
-//    console.log('Logged-In');
-//  })
-//  .catch((err) => {
+client.loginImplicitGrant("10b85dde-54ad-4bb1-b0b0-e80c29b39e4e", "https://baigsyboy.github.io/GenCloud-SendDTMF/", { state: "TEST" })
+  .then(() => {
+    console.log('Logged-In');
+  })
+  .catch((err) => {
     // Handle failure response
-//    console.log(err);
-//  });
+    console.log(err);
+  });
 
 function sendDTMF(){
   let apiInstance = new platformClient.ConversationsApi();
