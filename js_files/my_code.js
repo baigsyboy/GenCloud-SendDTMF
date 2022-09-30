@@ -1,6 +1,7 @@
 // Check local storage for parameters or get from URL
 // This is to deal with the redirect
-if (window.location.search){
+if (localStorage.conversationId){
+} else{
   const urlParams = new URLSearchParams(window.location.search); 
   localStorage.setItem('conversationId', urlParams.get('conv'));
   localStorage.setItem('participantId', urlParams.get('part'));
@@ -37,10 +38,11 @@ function sendDTMF(){
   const StrConversationId = localStorage.getItem('conversationId');
   const StrParticipantId = localStorage.getItem('participantId');
   const StrDigits = localStorage.getItem('DTMFdigits');
+  const digitsToSend = "\"" + StrDigits + "\""
   localStorage.clear();
   
   let opts = { 
-    'body': {"digits": StrDigits} // Object | Digits
+    'body': {"digits": digitsToSend} // Object | Digits
   };
   
   apiInstance.postConversationParticipantDigits(StrConversationId, StrParticipantId, opts)
