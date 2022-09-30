@@ -32,13 +32,13 @@ client.loginImplicitGrant("10b85dde-54ad-4bb1-b0b0-e80c29b39e4e", "https://baigs
     console.log(err);
   });
 
-function sendDTMF(){
+async function sendDTMF(){
   let apiInstance = new platformClient.ConversationsApi();
 
   const StrConversationId = localStorage.getItem('conversationId');
   const StrParticipantId = localStorage.getItem('participantId');
   const StrDigits = localStorage.getItem('DTMFdigits');
-  const digitsToSend = "\"" + StrDigits + "\""
+  const digitsToSend = "\"" + StrDigits + "\"";
   localStorage.clear();
   
   let opts = { 
