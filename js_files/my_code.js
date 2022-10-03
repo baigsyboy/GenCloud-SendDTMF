@@ -27,9 +27,10 @@ function sendDTMF(){
 
 // Check local storage for parameters or get from URL
 // This is to deal with the redirect
-const urlParams = new URLSearchParams(window.location.search);
-console.log("urlParams: ", urlParams);
-if (urlParams.length > 1){
+
+if (localStorage.converationId){
+} else {
+  const urlParams = new URLSearchParams(window.location.search);
   localStorage.setItem('conversationId', urlParams.get('conv'));
   localStorage.setItem('participantId', urlParams.get('part'));
   localStorage.setItem('DTMFdigits', urlParams.get('digits'));
