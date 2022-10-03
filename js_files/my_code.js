@@ -7,7 +7,7 @@ function sendDTMF(){
   const StrConversationId = localStorage.getItem('conversationId');
   const StrParticipantId = localStorage.getItem('participantId');
   const StrDigits = localStorage.getItem('DTMFdigits');
-  console.log("Digits: ", digitsToSend);
+  console.log("Digits: ", StrDigits);
   localStorage.clear();
   
   let opts = { 
