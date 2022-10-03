@@ -2,7 +2,7 @@
 //use the API to send the digits
 
 function sendDTMF(){
-  let apiInstance = new platformClient.ConversationsApi();
+  const apiInstance = new platformClient.ConversationsApi();
 
   const StrConversationId = localStorage.getItem('conversationId');
   const StrParticipantId = localStorage.getItem('participantId');
@@ -28,7 +28,7 @@ function sendDTMF(){
 // Check local storage for parameters or get from URL
 // This is to deal with the redirect
 
-if (localStorage.converationId){
+if (localStorage.conversationId){
 } else {
   const urlParams = new URLSearchParams(window.location.search);
   localStorage.setItem('conversationId', urlParams.get('conv'));
