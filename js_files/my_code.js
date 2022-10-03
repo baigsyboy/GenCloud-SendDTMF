@@ -7,7 +7,6 @@ function sendDTMF(){
   const StrConversationId = localStorage.getItem('conversationId');
   const StrParticipantId = localStorage.getItem('participantId');
   const StrDigits = localStorage.getItem('DTMFdigits');
-  const digitsToSend = "\"" + StrDigits + "\"";
   console.log("Digits: ", digitsToSend);
   localStorage.clear();
   
@@ -28,9 +27,8 @@ function sendDTMF(){
 
 // Check local storage for parameters or get from URL
 // This is to deal with the redirect
-if (localStorage.conversationId){
-} else{
-  const urlParams = new URLSearchParams(window.location.search); 
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.length > 1){
   localStorage.setItem('conversationId', urlParams.get('conv'));
   localStorage.setItem('participantId', urlParams.get('part'));
   localStorage.setItem('DTMFdigits', urlParams.get('digits'));
